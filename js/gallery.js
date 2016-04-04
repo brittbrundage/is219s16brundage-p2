@@ -53,7 +53,7 @@ function swapPhoto() {
 	
 }
 
-console.log(mCurrentIndex);
+console.log(mCurrentIndex)
 
 $('#slideShow .photoHolder img').attr('src',mImages[mCurrentIndex].imgPath);
 $('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
