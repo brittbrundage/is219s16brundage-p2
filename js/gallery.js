@@ -41,10 +41,10 @@ function swapPhoto() {
 	console.log(mCurrentIndex);
 }
 
-$('#slideShow .photoHolder img').attr('src', mImages [mCurrentIndex].imgPath);
+$('#slideShow .photoHolder img').attr('src',mImages[mCurrentIndex].imgPath);
 $('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
 $('#slideShow .details .description').text("Description: "+mImages[mCurrentIndex].description);
-$('#slideShow .details .date ').text("Date: "+mImages[mCurrentIndex].date);
+$('#slideShow .details .date').text("Date: "+mImages[mCurrentIndex].date);
 
 console.log('swap photo');
 mCurrentIndex++;
@@ -59,7 +59,7 @@ var mCurrentIndex = 0;
 var mRequest = new XMLHttpRequest();
 
 // Array holding GalleryImage objects (see below).
-var mImages = [];
+var mImages = [ ];
 
 // Holds the retrived JSON information
 var mJson;
@@ -91,11 +91,14 @@ window.addEventListener('load', function() {
 
 }, false);
 
-function GalleryImage() {
+function GalleryImage(imgLocation, description, data, imgPath) {
 	//implement me as an object to hold the following data about an image:
 	//1. location where photo was taken
+	this.imgLocation = imgLocation;
 	//2. description of photo
+	this.description = description;
 	//3. the date when the photo was taken
+	this.date = date;
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
-}
+	this.imgPath = imgPath;
 }
