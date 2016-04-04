@@ -41,6 +41,15 @@ function swapPhoto() {
 	console.log(mCurrentIndex);
 }
 
+$('#slideShow .photoHolder img').attr('src', mImages [mCurrentIndex].imgPath);
+$('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
+$('#slideShow .details .description').text("Description: "+mImages[mCurrentIndex].description);
+$('#slideShow .details .date ').text("Date: "+mImages[mCurrentIndex].date);
+
+console.log('swap photo');
+mCurrentIndex++;
+}
+
 
 
 // Counter for the mImages array
