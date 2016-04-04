@@ -83,6 +83,29 @@ $(document).ready( function() {
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
 	
+	$ ("img.moreIndicator").click(function(){
+		if($(this).hasClass("rot90")) {
+			$(this).removeClass("rot90").addClass("rot270");
+			$("div.details").fadeToggle("slow", "linear");
+		}
+		else {
+			$(this).removeClass("rot270").addClass("rot90");
+			$("div.details").fadeToggle("slow", "linear");
+		}
+	
+});
+
+$(".moreIndicator.rot90").css({"position": "relative", "left": "47%", "top": "-60px"});
+$("#nextPhoto").css({"position": "absolute", "right": "0"});
+$("#nextPhoto").click(function() {
+	swapPhoto();
+});
+
+$("prevPhoto").click(function() {
+	mCurrentIndex = mCurrentIndex-2;
+	swapPhoto();
+});
+
 });
 
 window.addEventListener('load', function() {
@@ -102,5 +125,3 @@ function GalleryImage(imgLocation, description, data, imgPath) {
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 	this.imgPath = imgPath;
 }
-
-
