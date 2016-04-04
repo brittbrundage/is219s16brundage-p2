@@ -102,3 +102,5 @@ function GalleryImage(imgLocation, description, data, imgPath) {
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 	this.imgPath = imgPath;
 }
+
+
