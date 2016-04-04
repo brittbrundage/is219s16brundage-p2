@@ -137,3 +137,23 @@ function GalleryImage(imgLocation, description, data, imgPath) {
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 	this.imgPath = imgPath;
 }
+
+function reqListener () {
+	try {
+		var mJson = JSON.parse(this.responseText);
+		for(var i =0; i < mJson.images.length; i++) {
+			var tempInfo = mJson.images[i];
+			var galleryImage = new GalleryImage(tempInfo.imgLocation, tempInfo.description,tempInfo.date,tempInfo.imgPath);
+			mImages.push(galleryImage);
+		}
+	}
+	catch(error) {
+		mRequest.addEventListener("load", reqListener);
+		mRequest.open("GET","images.json");
+		mRequest.send();
+	}
+}
+
+mRequest.addEventListener("load", reqListener);
+mRequest.open("GET", mUrl);
+mRequest.send();
