@@ -33,35 +33,34 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function getQueryParams(qs) {
-	qs = qs.split("+").join(" ");
-	var params = {}, tokens, re = /[?&]?([^=]+)=([^&]*)/g;
-	while (tokens = re.exec(qs)) {
-		params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
-	}
-	return params;
+  qs = qs.split("+").join(" ");
+  var params = {}, tokens, re = /[?&]?([^=]+)=([^&]*)/g;
+  while (tokens = re.exec(qs)) {
+    params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+  }
+  return params;
 } 
 
 var $_GET = getQueryParams(document.location.search);
-console.log($_GET["json"]);
+console.log($_GET["json"]); // would output "John"
+
 
 function swapPhoto() {
-	if (mCurrentIndex > mImages.length-1) {
-		mCurrentIndex =0;
-	}
-	else if (mCurrentIndex < 0) {
-		mCurrentIndex = mImages.length-1;
-	
-}
+	  if(mCurrentIndex > mImages.length-1){
+    mCurrentIndex = 0;
+  }else if (mCurrentIndex < 0) {
+    mCurrentIndex = mImages.length-1;
+  }
 
-console.log(mCurrentIndex)
+  console.log(mCurrentIndex)
 
-$('#slideShow .photoHolder img').attr('src',mImages[mCurrentIndex].imgPath);
-$('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
-$('#slideShow .details .description').text("Description: "+mImages[mCurrentIndex].description);
-$('#slideShow .details .date').text("Date: "+mImages[mCurrentIndex].date);
-
-console.log('swap photo');
-mCurrentIndex++;
+  $('#slideShow .photoHolder img').attr('src',mImages[mCurrentIndex].imgPath);
+  $('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
+  $('#slideShow .details .description ').text("Description: "+mImages[mCurrentIndex].description);
+  $('#slideShow .details .date ').text("Date: "+mImages[mCurrentIndex].date);
+ 
+	console.log('swap photo');
+  mCurrentIndex++;
 }
 
 
@@ -96,64 +95,63 @@ $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-	
-	$ ("img.moreIndicator").click(function(){
-		if($(this).hasClass("rot90")) {
-			$(this).removeClass("rot90").addClass("rot270");
-			$("div.details").fadeToggle("slow", "linear");
-		}
-		else {
-			$(this).removeClass("rot270").addClass("rot90");
-			$("div.details").fadeToggle("slow", "linear");
-		}
-	
-});
 
-$(".moreIndicator.rot90").css({"position": "relative", "left": "47%", "top": "-60px"});
-$("#nextPhoto").css({"position": "absolute", "right": "0"});
-$("#nextPhoto").click(function() {
-	swapPhoto();
-});
+  $( "img.moreIndicator" ).click(function() {
+    if($(this).hasClass( "rot90" )){
+      $( this ).removeClass("rot90").addClass( "rot270" );
+      $( "div.details" ).fadeToggle( "slow", "linear" );
+    }else {
+      $( this ).removeClass("rot270").addClass( "rot90" );
+      $( "div.details" ).fadeToggle( "slow", "linear" );
+    }
+  });
 
-$("prevPhoto").click(function() {
-	mCurrentIndex = mCurrentIndex-2;
-	swapPhoto();
-});
+  $(".moreIndicator.rot90").css({ "position": "relative","left": "47%", "top": "-60px"});
+
+  $( "#nextPhoto").css({ "position": "absolute", "right": "0" });
+
+  $( "#nextPhoto" ).click(function() {
+      swapPhoto();
+  });
+
+  $( "#prevPhoto" ).click(function() {
+      mCurrentIndex = mCurrentIndex- 2;
+      swapPhoto();
+  });
 
 });
 
 window.addEventListener('load', function() {
-	
+
 	console.log('window loaded');
 
 }, false);
 
-function GalleryImage(imgLocation, description, data, imgPath) {
+function GalleryImage(imgLocation, description, date, imgPath) {
 	//implement me as an object to hold the following data about an image:
 	//1. location where photo was taken
-	this.imgLocation = imgLocation;
+  this.imgLocation = imgLocation;
 	//2. description of photo
-	this.description = description;
+  this.description = description;
 	//3. the date when the photo was taken
-	this.date = date;
+  this.date = date;
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
-	this.imgPath = imgPath;
+  this.imgPath = imgPath;
 }
 
 function reqListener () {
-	try {
-		var mJson = JSON.parse(this.responseText);
-		for(var i =0; i < mJson.images.length; i++) {
-			var tempInfo = mJson.images[i];
-			var galleryImage = new GalleryImage(tempInfo.imgLocation, tempInfo.description,tempInfo.date,tempInfo.imgPath);
-			mImages.push(galleryImage);
-		}
-	}
-	catch(error) {
-		mRequest.addEventListener("load", reqListener);
-		mRequest.open("GET","images.json");
-		mRequest.send();
-	}
+  try{
+    var mJson = JSON.parse(this.responseText);
+    for(var i = 0; i < mJson.images.length; i++) {
+      var tempInfo = mJson.images[i];
+      var galleryImage = new GalleryImage(tempInfo.imgLocation,tempInfo.description,tempInfo.date,tempInfo.imgPath);
+      mImages.push(galleryImage);
+    }
+  }catch(error){
+    mRequest.addEventListener("load", reqListener);
+    mRequest.open("GET","images.json");
+    mRequest.send();
+  }
 }
 
 mRequest.addEventListener("load", reqListener);
