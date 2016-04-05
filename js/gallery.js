@@ -8,7 +8,7 @@
               function(/* function */ callback, /* DOMElement */ element){
                 window.setTimeout(callback, 1000 / 60);
               };
-    })();
+    })(); 
   
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
