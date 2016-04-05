@@ -46,6 +46,10 @@ console.log($_GET["json"]); // would output "John"
 
 
 function swapPhoto() {
+	//Add code here to access the #slideShow element.
+	//Access the img element and replace its source
+	//with a new image from your images array which is loaded
+	//from the JSON string
   if(mCurrentIndex > mImages.length-1){
     mCurrentIndex = 0;
   }else if (mCurrentIndex < 0) {
@@ -147,7 +151,7 @@ function reqListener () {
     }
   }catch(error){
     mRequest.addEventListener("load", reqListener);
-    mRequest.open("GET","extra.json");
+    mRequest.open("GET","images.json");
     mRequest.send();
   }
 }

@@ -37,8 +37,6 @@ body {
 .thumbnail {
 	position: relative;
 	box-shadow: 1px 3px 20px 0px;
-	height: 300px;
-	width:550px;
 }
 
 
@@ -113,9 +111,13 @@ Make it animate nicely. You'll need CSS3 for this*/
     -ms-transform: rotate(270deg);
     transform: rotate(270deg);
 
+		/* Firefox */
 	-moz-transition: all 1s ease;
+	/* WebKit */
 	-webkit-transition: all 1s ease;
+	/* Opera */
 	-o-transition: all 1s ease;
+	/* Standard */
 	transition: all 1s ease;
 }
 
