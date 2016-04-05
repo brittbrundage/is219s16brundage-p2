@@ -1,15 +1,15 @@
 // requestAnim shim layer by Paul Irish
     window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.oRequestAnimationFrame      ||
+              window.msRequestAnimationFrame     ||
               function(/* function */ callback, /* DOMElement */ element){
                 window.setTimeout(callback, 1000 / 60);
               };
-    })(); 
-  
+    })();
+
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
 
@@ -39,14 +39,14 @@ function getQueryParams(qs) {
     params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
   }
   return params;
-} 
+}
 
 var $_GET = getQueryParams(document.location.search);
 console.log($_GET["json"]); // would output "John"
 
 
 function swapPhoto() {
-	  if(mCurrentIndex > mImages.length-1){
+  if(mCurrentIndex > mImages.length-1){
     mCurrentIndex = 0;
   }else if (mCurrentIndex < 0) {
     mCurrentIndex = mImages.length-1;
@@ -58,12 +58,10 @@ function swapPhoto() {
   $('#slideShow .details .location').text("Location: "+mImages[mCurrentIndex].imgLocation);
   $('#slideShow .details .description ').text("Description: "+mImages[mCurrentIndex].description);
   $('#slideShow .details .date ').text("Date: "+mImages[mCurrentIndex].date);
- 
+  //console.log(mImages[0].location);
 	console.log('swap photo');
   mCurrentIndex++;
 }
-
-
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -78,7 +76,7 @@ var mImages = [];
 var mJson;
 
 // URL for the JSON to load by default
-// Some options for you are: extra.json, images.short.json; you will need to create your own extra.json later
+// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
 var mUrl = $_GET["json"];
 
 
@@ -92,7 +90,7 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 }
 
 $(document).ready( function() {
-	
+
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
 
@@ -157,4 +155,3 @@ function reqListener () {
 mRequest.addEventListener("load", reqListener);
 mRequest.open("GET", mUrl);
 mRequest.send();
-
