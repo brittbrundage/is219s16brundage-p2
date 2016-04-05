@@ -78,7 +78,7 @@ var mImages = [];
 var mJson;
 
 // URL for the JSON to load by default
-// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
+// Some options for you are: extra.json, images.short.json; you will need to create your own extra.json later
 var mUrl = $_GET["json"];
 
 
@@ -149,7 +149,7 @@ function reqListener () {
     }
   }catch(error){
     mRequest.addEventListener("load", reqListener);
-    mRequest.open("GET","images.json");
+    mRequest.open("GET","extra.json");
     mRequest.send();
   }
 }
